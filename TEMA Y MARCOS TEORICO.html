@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modelo de Investigación Paso a Paso</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; }
+    header { background: #004080; color: #fff; padding: 20px; text-align: center; }
+    main { max-width: 900px; margin: 20px auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    section { margin-bottom: 30px; }
+    h2, h3 { color: #004080; margin-top: 0; }
+    textarea, input { width: 100%; padding: 8px; }
+    select {
+      width: 100%;
+      padding: 8px;
+      height: 40px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-top: 6px;
+      box-sizing: border-box;
+    }: 1px solid #ccc; border-radius: 4px; margin-top: 6px; box-sizing: border-box; }
+    textarea { resize: vertical; height: 80px; }
+    button, a { text-decoration: none; display: inline-block; margin: 5px 0; }
+    button { background: #004080; color: #fff; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; }
+    button:hover { background: #003060; }
+    .btn-secondary { background: #e0e0e0; color: #004080; }
+    .btn-secondary:hover { background: #c0c0c0; }
+    .links-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; max-height: 200px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; border-radius: 4px; background: #fafafa; }
+    .links-container a { background: #e9f0ff; padding: 6px 8px; border-radius: 4px; flex: 0 0 auto; white-space: nowrap; }
+    .teoria-item { border: 1px solid #ccc; padding: 10px; margin-top: 10px; border-radius: 4px; background: #fafafa; }
+    .teoria-item textarea { height: 80px; }
+    .teoria-item .links-container { max-height: 100px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { border: 1px solid #ccc; padding: 6px; vertical-align: top; }
+    th { background: #ddd; }
+    .form-group { margin-bottom: 15px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Modelo de Investigación Paso a Paso</h1>
+    <p>Sigue cada paso para estructurar tu estudio. <strong>del Dr. José Rodolfo Chávez Mejía</strong></p>
+  </header>
+  <main>
+    <!-- Paso 1 -->
+    <section id="paso1">
+      <h2>Paso 1: Diagnóstico de Problemas</h2>
+      <p>Lista los problemas encontrados en el contexto de investigación (empresa, municipio, país, etc.):</p>
+      <textarea id="diagnostico" placeholder="1. Problema ..."></textarea>
+      <div>
+        <button class="btn-secondary" onclick="seleccionarDiagnostico()">Seleccionar todo</button>
+        <a href="https://chatgpt.com/g/g-6827765e88108191b90c5e002a87d93e-teorias-que-pueden-resolver-problemas" target="_blank">Ir a GPT para teorías</a>
+      </div>
+    </section>
+
+    <!-- Paso 2 -->
+    <section id="paso2">
+      <h2>Paso 2: Marco Teórico Inicial</h2>
+      <p>Agrega cada teoría por separado y busca en las fuentes indicadas:</p>
+      <div id="teorias-container"></div>
+      <button onclick="agregarTeoria()">Agregar teoría</button>
+    </section>
+
+    <!-- Paso 3 -->
+    <section id="paso3">
+      <h2>Paso 3: Sujetos, Contexto y Tipo de Investigación</h2>
+      <div class="form-group">
+        <label for="sujetos">Sujetos de estudio:</label>
+        <input type="text" id="sujetos" placeholder="Ej. empleados de una empresa...">
+      </div>
+      <div class="form-group">
+        <label for="contexto">Contexto de estudio:</label>
+        <input type="text" id="contexto" placeholder="Ej. municipio X, sector educativo...">
+      </div>
+      <div class="form-group">
+        <label for="tipo">Tipo de investigación:</label>
+        <select id="tipo">
+          <option value="descriptiva">Descriptiva</option>
+          <option value="correlacional">Correlacional</option>
+        </select>
+      </div>
+      <div style="text-align:center;">
+        <button onclick="generarTema()">Generar Tema</button>
+      </div>
+      <textarea id="tema" placeholder="Tema generado..." readonly></textarea>
+    </section>
+
+        <!-- Paso 4: Pregunta, Objetivo e Hipótesis -->
+    <section id="pasoPre4">
+      <h2>Paso 4: Pregunta de Investigación, Objetivo General e Hipótesis</h2>
+      <p>Define la <strong>Pregunta de Investigación</strong> incluyendo teorías, sujetos y contexto:</p>
+      <textarea id="pregunta-investigacion" placeholder="Pregunta de investigación..." readonly></textarea>
+      <p>Define el <strong>Objetivo General</strong>:</p>
+      <textarea id="objetivo-general" placeholder="Objetivo general..." readonly></textarea>
+      <p>Formule la <strong>Hipótesis</strong> según el tipo de investigación:</p>
+      <textarea id="hipotesis" placeholder="Hipótesis..." readonly></textarea>
+      <div style="text-align:center; margin-top:10px;">
+        <button onclick="generarPreguntaObjHip()">Generar PI, Objetivo e Hipótesis</button>
+      </div>
+    </section>
+
+    <!-- Paso 5: Marco Teórico Conceptual y Contextual -->
+    <section id="paso4">
+      <h2>Paso 4: Marco Teórico Conceptual y Contextual</h2>
+      <p>Para estructurar tu marco teórico, utiliza este recurso:</p>
+      <a href="https://chatgpt.com/g/g-68279e8792ec8191abf9abcff326791e-estructura-de-las-teorias" target="_blank">Estructura de las teorías</a>
+      <textarea id="marco-teorico" placeholder="Desarrolla aquí el marco teórico integrando aspectos conceptuales y contextuales..."></textarea>
+      <h3>Operacionalización de Variables</h3>
+      <p>Para generar el cuadro de operacionalización de variables, utiliza el siguiente recurso de GPT:</p>
+      <a href="https://chatgpt.com/g/g-6827aca6c5f481919692a10052a794fd-operacionalizacion-de-la-hipotesis" target="_blank">Operationalización de la hipótesis</a>
+    </section>
+    <div style="text-align:center; margin:20px 0;">
+    <a href="/mnt/data/Modelo_Investigacion_Paso_a_Paso.docx" download class="btn-secondary">Descargar modelo en Word</a>
+  </div>
+</main>
+
+  <script>
+    function seleccionarDiagnostico() {
+      const ta = document.getElementById('diagnostico'); ta.focus(); ta.select();
+    }
+    function agregarTeoria() {
+      const c = document.getElementById('teorias-container');
+      const d = document.createElement('div'); d.className='teoria-item';
+      d.innerHTML = `<textarea placeholder="Describe la teoría..."></textarea><div class="links-container"></div><button onclick="generarEnlaces(this)">Generar enlaces</button>`;
+      c.appendChild(d);
+    }
+    function generarEnlaces(btn) {
+      const fu = [
+        'https://scholar.google.com/scholar?q=',
+        'https://www.worldcat.org/search?q=',
+        'https://dialnet.unirioja.es/simpleBuscar.do?query=',
+        'https://www.redalyc.org/busqueda.html?texto=',
+        'https://www.scielo.org/search/?q=',
+        'https://www.jstor.org/action/doBasicSearch?Query=',
+        'https://muse.jhu.edu/search?action=browse&search=',
+        'https://www.doabooks.org/search?query=',
+        'https://openlibrary.org/search?q=',
+        'https://core.ac.uk/search?q=',
+        'https://www.researchgate.net/search?q=',
+        'https://www.academia.edu/search?q=',
+        'https://link.springer.com/search?query=',
+        'https://onlinelibrary.wiley.com/action/doSearch?AllField=',
+        'https://www.tandfonline.com/action/doSearch?AllField=',
+        'https://books.google.com/ngrams/graph?content='
+      ];
+      const div=btn.parentElement;
+      const txt=div.querySelector('textarea').value.trim(); if(!txt){alert('Ingresa teoría');return;}
+      const lc=div.querySelector('.links-container'); lc.innerHTML='';
+      fu.forEach(u=>{const a=document.createElement('a');let l=u+encodeURIComponent(txt);if(u.includes('ngrams'))l+='&year_start=1800&year_end=2022&corpus=es&smoothing=3&case_insensitive=false';a.href=l;a.target='_blank';a.textContent=u.replace(/https?:\/\//,'').split('/')[0];lc.appendChild(a)});
+    }
+    function generarTema() {
+      const ts = Array.from(document.querySelectorAll('#teorias-container textarea'))
+                    .map(t => t.value.trim()).filter(v => v);
+      const sujetos = document.getElementById('sujetos').value.trim();
+      const contexto = document.getElementById('contexto').value.trim();
+      const tipo = document.getElementById('tipo').value;
+      if (!sujetos || !contexto) {
+        alert('Completa sujetos y contexto para generar el tema.');
+        return;
+      }
+      // función para conjunción y/e
+      function conj(palabra) {
+        return /^[iIáÁ]/.test(palabra) ? ' e ' : ' y ';
+      }
+      let tema = '';
+      if (tipo === 'descriptiva') {
+        if (ts.length === 0) {
+          tema = `${sujetos} de ${contexto}`;
+        } else if (ts.length === 1) {
+          tema = `"${ts[0]}" en ${sujetos} de ${contexto}`;
+        } else {
+          tema = ts.map(t => `"${t}"`).join(conj(ts[1]));
+          tema += ` en ${sujetos} de ${contexto}`;
+        }
+      } else { // correlacional
+        if (ts.length >= 2) {
+          tema = `"${ts[0]}"${conj(ts[1])}"${ts[1]}"`;
+          if (ts.length >= 3) {
+            tema += ` y su efecto en "${ts[2]}"`;
+          }
+          tema += ` en ${sujetos} de ${contexto}`;
+        } else if (ts.length === 1) {
+          tema = `"${ts[0]}" en ${sujetos} de ${contexto}`;
+        } else {
+          tema = `${sujetos} de ${contexto}`;
+        }
+      }
+      document.getElementById('tema').value = tema;
+    }
+
+    function generarPreguntaObjHip() {
+      const teorias = Array.from(document.querySelectorAll('#teorias-container textarea'))
+                         .map(t => t.value.trim()).filter(v => v);
+      const sujetos = document.getElementById('sujetos').value.trim();
+      const contexto = document.getElementById('contexto').value.trim();
+      const tipo = document.getElementById('tipo').value;
+      if (!teorias.length || !sujetos || !contexto) {
+        alert('Completa teorías, sujetos y contexto para generar pregunta, objetivo e hipótesis.');
+        return;
+      }
+      // Pregunta de investigación
+      const pi = `¿Cómo se comporta ${teorias.join(' y ')} en ${sujetos} de ${contexto}?`;
+      document.getElementById('pregunta-investigacion').value = pi;
+      // Objetivo General
+      const og = `Analizar ${teorias.join(' y ')} en ${sujetos} de ${contexto}.`;
+      document.getElementById('objetivo-general').value = og;
+      // Hipótesis
+      let hip = '';
+      if (tipo === 'descriptiva') {
+        hip = `Se espera describir ${teorias.join(' y ')} en ${sujetos} de ${contexto}.`;
+      } else {
+        if (teorias.length >= 2) {
+          hip = `Se espera que ${teorias[0]} tenga un efecto en ${teorias[1]} en ${sujetos} de ${contexto}.`;
+          if (teorias[2]) {
+            hip = `Se espera que ${teorias[0]} y ${teorias[1]} tengan un efecto en ${teorias[2]} en ${sujetos} de ${contexto}.`;
+          }
+        } else {
+          hip = `Se espera que ${teorias[0]} influya en ${sujetos} de ${contexto}.`;
+        }
+      }
+      document.getElementById('hipotesis').value = hip;
+    }
+
+    function generarCuadro() {
+      const ts = Array.from(document.querySelectorAll('#teorias-container textarea')).map(t => t.value.trim()).filter(v => v);
+      const tbody = document.getElementById('op-body');
+      tbody.innerHTML = '';
+      ts.forEach(theoria => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>
+            <select>
+              <option>Variable Independiente</option>
+              <option>Variable Dependiente</option>
+            </select>
+          </td>
+          <td><input placeholder="Nombre variable" value="${theoria}"></td>
+          <td><textarea placeholder="Definición operacional"></textarea></td>
+          <td><textarea placeholder="Indicadores"></textarea></td>
+          <td><textarea placeholder="Cálculo"></textarea></td>
+          <td><input placeholder="Instrumento"></td>
+          <td><input placeholder="Herramienta"></td>
+          <td><input placeholder="Objetivo"></td>
+          <td><input placeholder="Pregunta investigación"></td>
+          <td><input placeholder="Pregunta encuesta"></td>
+          <td><button onclick="eliminarFila(this)">Eliminar</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function agregarFila(){const tb=document.getElementById('op-body');const tr=document.createElement('tr');tr.innerHTML=`<td><select><option>Variable Independiente</option><option>Variable Dependiente</option></select></td><td><input placeholder="Nombre variable"></td><td><textarea placeholder="Definición operacional"></textarea></td><td><textarea placeholder="Indicadores"></textarea></td><td><textarea placeholder="Cálculo"></textarea></td><td><input placeholder="Instrumento"></td><td><input placeholder="Herramienta"></td><td><input placeholder="Objetivo"></td><td><input placeholder="Pregunta investigación"></td><td><input placeholder="Pregunta encuesta"></td><td><button onclick="eliminarFila(this)">Eliminar</button></td>`;tb.appendChild(tr);}function eliminarFila(b){b.closest('tr').remove();}
+  </script>
+</body>
+</html>
